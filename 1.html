@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>¿Quieres ser mi San Valentín?</title>
+<style>
+body {
+  font-family: sans-serif;
+  text-align: center;
+  background-color: #FFC0EB;
+}
+
+#pregunta {
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 1.2em;
+  margin: 10px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+#si {
+  background-color: #4CAF50;
+  color: white;
+}
+
+#no {
+  background-color: #f44336;
+  color: white;
+}
+
+#mensaje {
+  font-size: 1.5em;
+  margin-top: 20px;
+  color: #FF5733;
+}
+
+#imagen {
+  margin-top: 20px;
+  max-width: 300px; /* Ancho máximo de la imagen */
+  height: auto; /* Altura automática para mantener la proporción */
+}
+</style>
+</head>
+<body>
+
+<div id="pregunta">¿Quieres ser mi San Valentín?</div>
+
+<button id="si">Sí</button>
+<button id="no">No</button>
+
+<div id="mensaje"></div>
+<img id="imagen" src="img/4.png" alt="gatito lindo">
+
+<script>
+const botonSi = document.getElementById("si");
+const botonNo = document.getElementById("no");
+const mensaje = document.getElementById("mensaje");
+const imagen = document.getElementById("imagen");
+
+const imagenes = ["img/1.png", "img/2.png", "img/3.png", "img/4.png", "img/0.png", "img/5.png", "img/6.png", "img/7.png", "img/8.png", "img/9.png", "img/10.png", "img/11.png"];
+let indiceImagen = 3; // Empezamos con la imagen 4 (índice 3)
+
+const respuestasNo = [
+  "Jajaja, muy graciosa. Casi me lo creo.",
+  "¡Vamos! Sé que en el fondo quieres pasar San Valentín conmigo.",
+  "¡Vamos! Tengo una sorpresa increíble para ti.",
+  "¡Acepta! No te arrepentirás de pasar este día conmigo.",
+  "¿Es tu última palabra? ¡Siempre estaré aquí si cambias de opinión!",
+  "Por favor, di que sii ",
+  "¿Acaso me estas rechazando? No pasa nada, solo me rompiste el corazoncito ",
+  "Vamos di que si ",
+  "¿No quieres arriesgarte? Te prometo que no te arrepentiras en lo absoluto.",
+  "Si no quieres, allá tú. No sabes de lo que te pierdes."
+];
+
+let escalaSi = 1;
+let escalaNo = 1;
+
+botonSi.addEventListener("click", function() {
+  mensaje.textContent = "¡Oh Sí! Sabía que ibas a decir que sí. Te quiero mucho <3";
+  indiceImagen = 3; // Restablecer la imagen a la 4
+  imagen.src = imagenes[indiceImagen];
+  escalaSi = 1; // Restablecer la escala del botón "Sí"
+  escalaNo = 1; // Restablecer la escala del botón "No"
+  botonSi.style.transform = `scale(${escalaSi})`;
+  botonNo.style.transform = `scale(${escalaNo})`;
+});
+
+botonNo.addEventListener("click", function() {
+  escalaNo -= 0.1;
+  botonNo.style.transform = `scale(${escalaNo})`;
+
+  escalaSi += 0.2;
+  botonSi.style.transform = `scale(${escalaSi})`;
+
+  const respuestaAleatoria = respuestasNo[Math.floor(Math.random() * respuestasNo.length)];
+  mensaje.textContent = respuestaAleatoria;
+
+  indiceImagen = (indiceImagen + 1) % imagenes.length;
+  imagen.src = imagenes[indiceImagen];
+});
+</script>
+
+</body>
+</html>
